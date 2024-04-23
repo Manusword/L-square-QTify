@@ -1,0 +1,31 @@
+.navbar{
+    height: 74px;
+    background-color: #34C94B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 67px;
+    height: 34px;
+    margin-top: 0px;
+    margin-left: 32px;
+}
+
+.button{
+    font-family: "proppins";
+    font-size: 18px;
+    font-weight: 600;
+    color:#34C94B;
+    align-items: center;
+    background-color: #121212;
+    width: 170px;
+    height: 47px;
+    padding: 10px 16px 10px 16px;
+    margin-right: 32px;
+    border-radius: 12px;
+    border:1px;
+    gap:10px
+}
+
