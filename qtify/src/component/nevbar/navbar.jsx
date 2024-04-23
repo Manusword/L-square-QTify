@@ -1,6 +1,6 @@
 import './navbar.css';
 import logo from "../../assets/logo.png"
-import Button from '@mui/material/Button';
+import searchLogo from '../../assets/search-icon.svg';
 
 
 export default function Nevbar() {
@@ -8,9 +8,15 @@ export default function Nevbar() {
     <>
         <nav className='navbar'>
           <img src={logo} alt='logo' className='logo' />
-          <button variant="contained" className='button'>Give Feedback</button>
+          <div className='searchbox'>
+            <input type='text' className='search' placeholder='Search a album of your choice' />
+            <button  className='searchbutton'>
+              <img src={searchLogo} alt='logo' className='searchLogo' />
+            </button>
+          </div>
+          <button  className='button'>Give Feedback</button>
         </nav>
-    </>
+     </>
   );
 }
 
@@ -43,4 +49,6 @@ const theme = useTheme();
       </AppBar>
     </Box>
 
+  //normal search
+    <input type="text" className='searchbox' placeholder="Search a album of your choice"></input> 
     */
