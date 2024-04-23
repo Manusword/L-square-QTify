@@ -4,13 +4,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px 16px 0px 32px;
 }
 
 .logo{
     width: 67px;
     height: 34px;
-    margin-top: 0px;
-    margin-left: 32px;
+    /* margin-top: 0px;
+    margin-left: 32px; */
 }
 
 .button{
@@ -38,7 +39,7 @@
 
 .search{
     font-family: "Lato";
-    width: 502px;
+    width: 90%;
     height: 48px;
     padding-left: 10px;
     font-size: 16px;
@@ -50,9 +51,10 @@
 }
 
 .searchbutton{
+    font-family: "proppins";
     background-color: #FFFFFF;
     color: #121212;
-    width: 66px;
+    width: 10%;
     height: 48px;
     border:1px black solid;
     border-radius: 0px 8px 8px 0px;
@@ -62,10 +64,13 @@
     -o-border-radius: 0px 8px 8px 0px;
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 .searchLogo{
     width: 18px;
     height: 15px;
-    
 }
 /* 
 .searchbox{
