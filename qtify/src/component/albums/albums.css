@@ -1,0 +1,92 @@
+.alumsRow{
+    background-color: #121212;
+    width: 100%;
+    height: 592px;
+}
+
+.alumsBox{
+    color:white;
+    width: 90%;
+    height: 280px;
+    margin-left: 5%;
+    
+}
+
+.alumsheader{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.showall{
+    color:#34C94B;
+}
+
+.alumsbody{
+    width: 98%;
+    height: 232px;
+    margin-left: 1%;
+    margin-top: 12px;
+    display: flex;
+    justify-content:space-around;
+    overflow: hidden;
+}
+
+.SingleAlbumBox{
+    width: 159px;
+    height: 232px;
+    margin-right: 10px;
+}
+
+.SingleAlbumBox p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 6px;
+    color: #FFFFFF;
+}
+
+.SingleAlbum{
+    width: 159px;
+    height: 205px;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -ms-border-radius: 10px 10px 10px 10px;
+    -o-border-radius: 10px 10px 10px 10px;
+}
+
+.SingleAlbumBody img{
+    width: 159px;
+    height: 159px;
+}
+.SingleAlbumBody img{
+    width: 100%;
+    height: 100%;
+}
+
+.SingleAlbumFooter{
+    width: 159px;
+    height: 40px;
+}
+
+.SingleAlbumFooterButton{
+    width: 71px;
+    height:23px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-top: 8px;
+    margin-left: 6px;
+    padding: 4px 8px 4px 8px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+
+
+
+
