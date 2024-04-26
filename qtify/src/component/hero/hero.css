@@ -15,12 +15,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+   
 }
 
 .text{
-    font-family: "Poppins";
     font-size: 32px;
     font-weight: 600;
+}
+.text p {
+    margin: 0px;
 }
 
 .heroImage{
