@@ -1,7 +1,24 @@
 import './albums.css';
-import heroImg from "../../assets/hero_headphones.png";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
+
+//swiper
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// import required modules
+import { FreeMode, Pagination, Navigation } from 'swiper/modules';
+
+
+
+
+
 
 const Album =({image,follows})=>{
     return(
@@ -35,10 +52,19 @@ const AlbumBox =({rowname,data})=>{
                 <p className='showall'>Show all</p>
             </div>
             <div className='alumsbody'>
-                
+
+           
+                <Swiper
+                    slidesPerView={7}
+                    //spaceBetween={1}
+                    className="mySwiper"
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                >
                 {
                     data?.map((al)=>{
                         return (
+                            <SwiperSlide>
                             <SingleAlbumBox 
                                 key={al.id}
                                 id={al.id}
@@ -47,9 +73,11 @@ const AlbumBox =({rowname,data})=>{
                                 follows={al.follows}
                                 slug={al.slug}
                             />
+                            </SwiperSlide>
                         )
                     })
                 }
+                </Swiper>
             </div>
         </div>
     )
