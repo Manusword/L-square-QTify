@@ -18,40 +18,90 @@ import { FreeMode, Pagination, Navigation } from 'swiper/modules';
 
 
 
-const Album =({image,follows})=>{
+const Album =({image,num,likeFollow})=>{
     return(
         <div className='SingleAlbum'>
             <div className='SingleAlbumBody'>
                 <img src={image} alt="album img" />
             </div>
             <div className='SingleAlbumFooter'>
-                <button className='SingleAlbumFooterButton'>{follows} Follows</button>
+                <button className='SingleAlbumFooterButton'>{num} {likeFollow}</button>
             </div>
         </div>
     )
 }
 
-const SingleAlbumBox =({id,title,image,follows,slug})=>{
+const SingleAlbumBox =({id,title,image,follows,slug,like,showMenu})=>{
+    let num = 0; 
+    let likeFollow= "";
+    if(showMenu){
+        num = like;
+        likeFollow='Likes';
+    }else{
+        num = follows;
+        likeFollow='Follows';
+    }
     return(
         <div className='SingleAlbumBox'>
-            <Album image={image} follows={follows} />
+            <Album image={image} num={num} likeFollow={likeFollow} />
             <p>{title}</p>
         </div>
     )
 }
 
 
-const MenuBox =({id,title,image,follows,slug})=>{
+const MenuBox =({genres,selectFun})=>{
     return(
         <div className='alumsMenu'>
-           <BasicTabs />
+           <BasicTabs genres={genres} selectFun={selectFun} />
         </div>
     )
 }
 
 
 const AlbumBox =({rowname,data,showMenu})=>{
-    //console.log(data)
+    const [genres,setGenres] = useState([]);
+    const [song,setSong] = useState([]);
+    const [selectedValue, setSelectedValue] = useState('');
+   
+   
+    
+    const getAlbumData= async()=>{
+        try{
+            //console.log(url)
+            await axios.get('https://qtify-backend-labs.crio.do/genres')
+            .then(function (response) {
+                //console.log(response.data);
+                setGenres(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
+    useEffect(()=>{
+        getAlbumData()
+        if(showMenu){
+            setSong(data)
+        }
+    },[])
+    //console.log(song)
+
+    const selectFun = (event, newValue) => {
+        console.log(newValue)
+        
+        newValue = newValue-1;
+        setSelectedValue(genres.data[newValue]['key']);
+        const newList = data.filter(so=>so.genre['key'] === genres.data[newValue]['key']);
+        setSong(newList)
+        // console.log(newList);
+        // console.log(genres.data[newValue]['key'])
+    };
+
     return(
         <div className='alumsBox'>
             <div className='alumsheader'>
@@ -59,7 +109,7 @@ const AlbumBox =({rowname,data,showMenu})=>{
                 <p className='showall'>Show all</p>
             </div>
             {
-                showMenu && (<MenuBox />)
+                showMenu && (<MenuBox selectFun={selectFun} genres={genres} />)
             }
            
             <div className='alumsbody'>
@@ -71,6 +121,24 @@ const AlbumBox =({rowname,data,showMenu})=>{
                     modules={[Pagination, Navigation]}
                 >
                 {
+                    showMenu ?
+                        song?.map((al)=>{
+                            return (
+                                <SwiperSlide>
+                                <SingleAlbumBox 
+                                    key={al.id}
+                                    id={al.id}
+                                    title={al.title}
+                                    image={al.image}
+                                    follows={al.follows}
+                                    slug={al.slug}
+                                    like={al.likes}
+                                    showMenu={showMenu}
+                                />
+                                </SwiperSlide>
+                            )
+                        })
+                    : 
                     data?.map((al)=>{
                         return (
                             <SwiperSlide>
@@ -81,6 +149,8 @@ const AlbumBox =({rowname,data,showMenu})=>{
                                 image={al.image}
                                 follows={al.follows}
                                 slug={al.slug}
+                                like={al.likes}
+                                showMenu={showMenu}
                             />
                             </SwiperSlide>
                         )
@@ -95,10 +165,21 @@ const AlbumBox =({rowname,data,showMenu})=>{
 
 const RowAlbums = ({apiName,rowname,showMenu})=> {
     const [data,setData] = useState([])
+    let url = "";
+    if(showMenu){
+        //song
+        url = `https://qtify-backend-labs.crio.do/songs`;
+        //url = `https://qtify-backend-labs.crio.do/albums/${apiName}`;
+    }
+    else{
+        //album
+        url = `https://qtify-backend-labs.crio.do/albums/${apiName}`;
+    }
     
     const getAlbumData= async()=>{
         try{
-            await axios.get(`https://qtify-backend-labs.crio.do/albums/${apiName}`)
+            //console.log(url)
+            await axios.get(url)
             .then(function (response) {
                 //console.log(response.data);
                 setData(response.data)
@@ -118,7 +199,7 @@ const RowAlbums = ({apiName,rowname,showMenu})=> {
 
     return (
       <>
-        <AlbumBox rowname={rowname} data={data} showMenu={showMenu} />
+        <AlbumBox  rowname={rowname} data={data} showMenu={showMenu}  />
       </>
     )
 }

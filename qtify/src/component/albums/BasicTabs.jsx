@@ -39,22 +39,27 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({valueNew=0,genres,selectFun}) {
   const [value, setValue] = React.useState(0);
+  // const handleChange = (event, newValue) => {
+  //   console.log(newValue)
+  //   setValue(newValue);
+  // };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  
+ 
   return (
     <Box sx={{ width: '100%', color:"white" }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor="white">
-          <Tab label="All" {...a11yProps(0)} />
-          <Tab label="Rock" {...a11yProps(1)} />
-          <Tab label="Pop" {...a11yProps(2)} />
-          <Tab label="Jazz" {...a11yProps(2)} />
-          <Tab label="Blues" {...a11yProps(2)} />
+        <Tabs value={value} onChange={selectFun} aria-label="basic tabs example" textColor="white">
+          <Tab label="All" {...a11yProps(0)}  /> 
+          {
+            genres.data?.map((data,index)=>{
+              return(
+                <Tab label={data.label} {...a11yProps(index)}  />     
+              )
+            })
+          }
         </Tabs>
       </Box>
       {/* <CustomTabPanel value={value} index={0}>
