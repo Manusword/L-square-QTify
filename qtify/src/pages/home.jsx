@@ -3,6 +3,7 @@ import Hero from "../component/hero/hero";
 import AlbumsRow from "../component/albums/albumsRow";
 
 
+
 function Header() {
     return (
       <>

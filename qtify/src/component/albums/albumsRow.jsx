@@ -1,12 +1,10 @@
 import './albums.css';
 import axios from 'axios';
 import { useEffect, useState,useRef } from 'react';
-
-//swiper
+import BasicTabs from "./BasicTabs";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -43,17 +41,28 @@ const SingleAlbumBox =({id,title,image,follows,slug})=>{
 }
 
 
-const AlbumBox =({rowname,data})=>{
-    console.log(data)
+const MenuBox =({id,title,image,follows,slug})=>{
+    return(
+        <div className='alumsMenu'>
+           <BasicTabs />
+        </div>
+    )
+}
+
+
+const AlbumBox =({rowname,data,showMenu})=>{
+    //console.log(data)
     return(
         <div className='alumsBox'>
             <div className='alumsheader'>
                 <p>{rowname}</p>
                 <p className='showall'>Show all</p>
             </div>
-            <div className='alumsbody'>
-
+            {
+                showMenu && (<MenuBox />)
+            }
            
+            <div className='alumsbody'>
                 <Swiper
                     slidesPerView={7}
                     //spaceBetween={1}
@@ -84,7 +93,7 @@ const AlbumBox =({rowname,data})=>{
 }
 
 
-const RowAlbums = ({apiName,rowname})=> {
+const RowAlbums = ({apiName,rowname,showMenu})=> {
     const [data,setData] = useState([])
     
     const getAlbumData= async()=>{
@@ -109,7 +118,7 @@ const RowAlbums = ({apiName,rowname})=> {
 
     return (
       <>
-        <AlbumBox rowname="Top Albums" data={data}  />
+        <AlbumBox rowname={rowname} data={data} showMenu={showMenu} />
       </>
     )
 }
@@ -120,6 +129,7 @@ const AlbumsRow = ()=> {
       <div className='alumsRow'>
         <RowAlbums apiName='top' rowname="Top Albums" />
         <RowAlbums apiName='new' rowname="New Albums" />
+        <RowAlbums apiName='new' rowname="Songs" showMenu={true} />
        </div>
     )
 }
