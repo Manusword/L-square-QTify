@@ -92,8 +92,8 @@ const AlbumBox =({rowname,data,showMenu})=>{
     //console.log(song)
 
     const selectFun = (event, newValue) => {
-        console.log(newValue)
         
+        // console.log(newValue)
         newValue = newValue-1;
         setSelectedValue(genres.data[newValue]['key']);
         const newList = data.filter(so=>so.genre['key'] === genres.data[newValue]['key']);
@@ -121,7 +121,7 @@ const AlbumBox =({rowname,data,showMenu})=>{
                     modules={[Pagination, Navigation]}
                 >
                 {
-                    showMenu ?
+                    showMenu && selectedValue?
                         song?.map((al)=>{
                             return (
                                 <SwiperSlide>
